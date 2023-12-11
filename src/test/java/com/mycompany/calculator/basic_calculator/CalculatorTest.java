@@ -18,5 +18,38 @@ class CalculatorTest {
 				Calculator.evaluatePostfix(new String[]{"10", "6", "9", "3", "+", "-11", "*", "/", "*", "17", "+", "5", "+"}),
 				DELTA);
 	}
+	
+	@Test
+	void testConvertInfixToPostfix() {
+		assertArrayEquals(new String[]{"3"}, 
+				Calculator.convertInfixToPostfix(new String[]{"3"}));
+		
+		assertArrayEquals(new String[]{"2", "1", "+", "3", "*"}, 
+				Calculator.convertInfixToPostfix(new String[]{"(", "2", "+", "1", ")", "*", "3"}));
+		
+		assertArrayEquals(new String[]{"4", "13", "5", "/", "+"}, 
+				Calculator.convertInfixToPostfix(new String[]{"4", "+", "13", "/", "5"}));
+		
+		assertArrayEquals(new String[]{"10", "6", "9", "3", "+", "-11", "*", "/", "*", "17", "+", "5", "+"}, 
+				Calculator.convertInfixToPostfix(new String[]{"10", "*", "(", "6", "/", "(", "(", "9", "+", "3", ")", "*", "-11", ")", ")", "+", "17", "+", "5"}));
+		
+		assertArrayEquals(new String[]{"8", "2", "/", "4", "*"}, 
+				Calculator.convertInfixToPostfix(new String[]{"8", "/", "2", "*", "4"}));
+		
+		Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+			Calculator.convertInfixToPostfix(new String[]{"2", "+", "1", ")", "*", "3"});
+		});
+		assertEquals("There are mismatched parentheses.", exception.getMessage());
+		
+		exception = assertThrows(IllegalArgumentException.class, () -> {
+			Calculator.convertInfixToPostfix(new String[]{"(", "2", "+", "1", "*", "3"});
+		});
+		assertEquals("There are mismatched parentheses.", exception.getMessage());
+		
+		exception = assertThrows(IllegalArgumentException.class, () -> {
+			Calculator.convertInfixToPostfix(new String[]{"2", "+", "y"});
+		});
+		assertEquals("There is an unknown token.", exception.getMessage());
+	}
 
 }
