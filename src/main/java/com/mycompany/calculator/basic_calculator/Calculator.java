@@ -23,7 +23,7 @@ public class Calculator {
 		List<String> output = new LinkedList<>();
 		
 		for (String token : tokens) {
-			if (isNumber(token)) {
+			if (isNumber(token) || isVariable(token)) {
 				output.add(token);
 			} else if (isOperator(token)) {
 				while (!operators.isEmpty() && !Objects.equals(operators.peek(), "(") && 
@@ -117,12 +117,14 @@ public class Calculator {
 	}
 	
 	private static boolean isOperator(String token) {
-		Objects.requireNonNull(token);
-		return token.matches("[-+*/]");
+		return Objects.requireNonNull(token).matches("[-+*/]");
 	}
 	
 	private static boolean isNumber(String token) {
-		Objects.requireNonNull(token);
-		return token.matches("-?\\d+(\\.\\d+)?");
+		return Objects.requireNonNull(token).matches("-?\\d+(\\.\\d+)?");
+	}
+	
+	private static boolean isVariable(String token) {
+		return Objects.requireNonNull(token).equals("x");
 	}
 }
