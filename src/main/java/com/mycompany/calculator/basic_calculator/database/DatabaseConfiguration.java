@@ -8,8 +8,7 @@ public class DatabaseConfiguration {
 	private final static Properties properties = new Properties();
 	
 	static {
-		InputStream inputStream = DatabaseConfiguration.class.getClassLoader().getResourceAsStream("database.properties");
-		try {
+		try (InputStream inputStream = DatabaseConfiguration.class.getClassLoader().getResourceAsStream("database.properties")) {
 			properties.load(inputStream);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
