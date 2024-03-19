@@ -21,4 +21,8 @@ public class Expression {
 		
 		return Calculator.evaluatePostfix(tokens);
 	}
+	
+	public String[] getPostfix() {
+		return this.postfix;
+	}
 }
