@@ -8,7 +8,7 @@ public class Equation {
 	private Expression lhs;
 	private Expression rhs;
 	
-	Equation(String equation) {
+	public Equation(String equation) {
 		Objects.requireNonNull(equation);
 		String[] expressions = equation.split("=", 2);
 		this.lhs = new Expression(expressions[0]);
