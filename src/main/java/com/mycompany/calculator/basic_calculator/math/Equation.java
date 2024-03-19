@@ -18,4 +18,12 @@ public class Equation {
 	public boolean isRoot(double x) {
 		return ((lhs.evaluate(x) - rhs.evaluate(x)) <= DELTA);
 	}
+	
+	public Expression getLhs() {
+		return this.lhs;
+	}
+	
+	public Expression getRhs() {
+		return this.rhs;
+	}
 }
